@@ -14,14 +14,6 @@ class ArrayModelSerializationTest {
 
     private lateinit var objectMapper: ObjectMapper
 
-    @BeforeEach
-    fun setup() {
-        objectMapper = jacksonObjectMapper()
-        MutableSettings.updateSettings(
-            genTypes = setOf(CodeGenerationType.HTTP_MODELS),
-        )
-    }
-
     @Test
     fun `ContainsUniqueArrayRef serializes and deserializes correctly`() {
 
@@ -42,7 +34,7 @@ class ArrayModelSerializationTest {
         val originalJsonNode = objectMapper.readTree(originalJson)
         val serializedJsonNode = objectMapper.readTree(serializedJson)
 
-        // FAILS because the order of elements in a Set is not guaranteed
+        // FAILS because the order of elements in a Set is not guaranteed (serializedJsonNode corresponds to: {"weight_on_mars":[1,2,3,4,5,6]})
         assertThat(serializedJsonNode).isEqualTo(originalJsonNode)
     }
 }
