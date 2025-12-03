@@ -296,6 +296,12 @@ object PropertyUtils {
                 }
             }
 
+            is PropertyInfo.ListField -> {
+                // Add @Valid for nested complex types
+                if (info.hasUniqueItems) {
+                    maybeAddAnnotation(validationAnnotations.uniqueItems())
+                }
+            }
             else -> {}
         }
 

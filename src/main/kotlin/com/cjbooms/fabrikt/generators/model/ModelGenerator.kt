@@ -100,7 +100,7 @@ class ModelGenerator(
                     )
                     val annotatedElementType = MutableSettings.serializationLibrary.serializationAnnotations
                         .annotateArrayElementType(elementType, typeInfo.parameterizedType)
-                    if (typeInfo.hasUniqueItems) {
+                    if (typeInfo.hasUniqueItems && !MutableSettings.modelOptions.contains(ModelCodeGenOptionType.UNIQUE_ITEMS_VALIDATION)) {
                         createSet(annotatedElementType)
                     } else {
                         createList(annotatedElementType)
